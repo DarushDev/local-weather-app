@@ -23,3 +23,8 @@ body {
 .jumbotron {
     display: inline-block;
 }
+
+.alert-success{
+    font-size: 22px;
+    font-weight: bold;
+}

@@ -29,9 +29,21 @@ var backgrounds = {
     "sleet": "https://pixabay.com/get/e83db5072bf0073ed1584d05fb0938c9bd22ffd41db8174593f9c37ca7/snow-1848346_1280.png",
     "wind": "https://pixabay.com/get/e83cb10920f7043ed1584d05fb0938c9bd22ffd41db8174593f9c071a5/reed-1906835_1280.jpg",
     "fog": "https://pixabay.com/get/ec31b60c2ef71c22d2524518a33219c8b66ae3d110b715479cf2c97e/forest-547363_1280.jpg",
-    "cloudy": "https://pixabay.com/get/eb34b8082efc043ed1584d05fb0938c9bd22ffd41db8174593f8c879af/weather-2197685_1280.jpg",
+    "cloudy": "https://pixabay.com/get/ec3cb30b29f11c22d2524518a33219c8b66ae3d110b7154694f5c37d/sky-592415_1280.jpg",
     "partly-cloudy-day": "https://pixabay.com/get/e833b7092efc073ed1584d05fb0938c9bd22ffd41db8174593f9c27da1/sky-1666686_1280.jpg",
     "partly-cloudy-night": "https://pixabay.com/get/e83db7062ff1023ed1584d05fb0938c9bd22ffd41db8174593f9c270a3/cloudy-1869753_1280.jpg"
+};
+var descriptions = {
+    "clear-day": "It is a clear day",
+    "clear-night": "It is a clear night",
+    "rain": "It is raining",
+    "snow": "It is snowing",
+    "sleet": "It is sleeting",
+    "wind": "It is windy",
+    "fog": "It is foggy",
+    "cloudy": "It is cloudy",
+    "partly-cloudy-day": "It is a partly cloudy day",
+    "partly-cloudy-night": "It is a partly cloudy night"
 };
 
 function callWeatherApi(url) {
@@ -40,6 +52,7 @@ function callWeatherApi(url) {
         $("#icon").attr("src", icons[data.currently.icon]);
         $("#temperature").text(temperature);
         $("#timezone").text(data.timezone);
+        $("#description").text(descriptions[data.currently.icon]);
         $("body").css("background-image", "url("+backgrounds[data.currently.icon])+")";
     };
     var error = function () {
