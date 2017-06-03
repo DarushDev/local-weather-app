@@ -1,5 +1,13 @@
 .disabled{
-    pointer-events: none;
     cursor: default;
     color: #000;
+}
+
+.enabled{
+    cursor:pointer;
+    color:#006dcc;
+}
+
+.enabled:hover{
+    color:#005096;
 }
