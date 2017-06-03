@@ -22,23 +22,6 @@ var icons = {
 };
 var temperature = 0;
 
-function showLocation(position) {
-    var coords = position.coords.latitude + "," + position.coords.longitude;
-    var url = "https://api.darksky.net/forecast/018bc18be3c49f1fc86117b8e0fef0d5/" + coords + "?units=si&" + exclude;
-    $("#celsius").click(function () {
-        $("#temperature").text(temperature);
-        $("#celsius").addClass("disabled").removeClass("enabled");
-        $("#fahrenheit").addClass("enabled").removeClass("disabled");
-    });
-
-    $("#fahrenheit").click(function () {
-        $("#temperature").text(Number((1.8 * temperature + 32).toFixed(2)));
-        $("#fahrenheit").addClass("disabled").removeClass("enabled");
-        $("#celsius").addClass("enabled").removeClass("disabled");
-    });
-
-    callWeatherApi(url);
-}
 
 function callWeatherApi(url) {
     var success = function (data) {
@@ -63,13 +46,18 @@ function callWeatherApi(url) {
 
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showLocation, displayError);
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     } else {
         alert("Geolocation is not supported by this browser");
     }
 }
 
-function displayError(error) {
+function successCallback(position) {
+    var coords = position.coords.latitude + "," + position.coords.longitude;
+    callWeatherApi("https://api.darksky.net/forecast/018bc18be3c49f1fc86117b8e0fef0d5/" + coords + "?units=si&" + exclude);
+}
+
+function errorCallback(error) {
     switch (error.code) {
         case error.PERMISSION_DENIED:
             alert("Location permission was denied");
@@ -87,8 +75,25 @@ function displayError(error) {
             alert("Who knows what happened...");
             break;
     }
+
+    $.getJSON("https://ipinfo.io/json", function (data) {
+        callWeatherApi("https://api.darksky.net/forecast/018bc18be3c49f1fc86117b8e0fef0d5/" + data.loc + "?units=si&" + exclude);
+    });
 }
 
 $(document).ready(function () {
     getLocation();
+
+    $("#celsius").click(function () {
+        $("#temperature").text(temperature);
+        $("#celsius").addClass("disabled").removeClass("enabled");
+        $("#fahrenheit").addClass("enabled").removeClass("disabled");
+    });
+
+    $("#fahrenheit").click(function () {
+        $("#temperature").text(Number((1.8 * temperature + 32).toFixed(2)));
+        $("#fahrenheit").addClass("disabled").removeClass("enabled");
+        $("#celsius").addClass("enabled").removeClass("disabled");
+    });
+
 });
