@@ -23,30 +23,17 @@ var icons = {
 var temperature = 0;
 
 function showLocation(position) {
+
     var coords = position.coords.latitude + "," + position.coords.longitude;
     var url = "https://api.darksky.net/forecast/018bc18be3c49f1fc86117b8e0fef0d5/" + coords + "?units=si&" + exclude;
-    $("#celsius").click(function () {
-        $("#temperature").text(temperature);
-        $("#celsius").addClass("disabled").removeClass("enabled");
-        $("#fahrenheit").addClass("enabled").removeClass("disabled");
-    });
 
-    $("#fahrenheit").click(function () {
-        $("#temperature").text(Number((1.8 * temperature + 32).toFixed(2)));
-        $("#fahrenheit").addClass("disabled").removeClass("enabled");
-        $("#celsius").addClass("enabled").removeClass("disabled");
-    });
-
-    callWeatherApi(url);
-}
-
-function callWeatherApi(url) {
     var success = function (data) {
         temperature = data.currently.temperature;
         $("#icon").attr("src", icons[data.currently.icon]);
         $("#temperature").text(temperature);
         $("#timezone").text(data.timezone);
     };
+
     var error = function () {
         alert("error");
     };
@@ -87,8 +74,26 @@ function displayError(error) {
             alert("Who knows what happened...");
             break;
     }
+
+    $.getJSON("https://ipinfo.io/json", function (data) {
+        var url = "https://api.darksky.net/forecast/018bc18be3c49f1fc86117b8e0fef0d5/" + data.loc + "?units=si&" + exclude;
+        callWeatherApi(url);
+    });
 }
 
 $(document).ready(function () {
     getLocation();
+
+    $("#celsius").click(function () {
+        $("#temperature").text(temperature);
+        $("#celsius").addClass("disabled").removeClass("enabled");
+        $("#fahrenheit").addClass("enabled").removeClass("disabled");
+    });
+
+    $("#fahrenheit").click(function () {
+        $("#temperature").text(Number((1.8 * temperature + 32).toFixed(2)));
+        $("#fahrenheit").addClass("disabled").removeClass("enabled");
+        $("#celsius").addClass("enabled").removeClass("disabled");
+    });
+
 });
