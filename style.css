@@ -1,13 +1,25 @@
-.disabled{
+body {
+    background: #006400 no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.disabled {
     cursor: default;
     color: #000;
 }
 
-.enabled{
-    cursor:pointer;
-    color:#006dcc;
+.enabled {
+    cursor: pointer;
+    color: #006dcc;
 }
 
-.enabled:hover{
-    color:#005096;
+.enabled:hover {
+    color: #005096;
+}
+
+.jumbotron {
+    display: inline-block;
 }
