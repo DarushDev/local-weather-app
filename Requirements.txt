@@ -1,0 +1,22 @@
+Should return:
+- city
+- country
+- Temperature
+- Unit
+- Weather condiction icon
+- Description
+
+Should include:
+- Background should change based on weather condition (snowy mountain, hot desert, etc)
+- Toggle between celsious and Fahrenheit
+
+Note: Many internet browsers now require an HTTP Secure (https://) connection to obtain a user's locale via HTML5 Geolocation. For this reason, you will need to choose one of two paths to complete this project:
+
+Use HTML5 Geolocation to get user location and then use the Dark Sky API(https://darksky.net/dev/docs/forecast) which uses an HTTP Secure connection for the weather. Also, be sure to connect to CodePen.io via https://.
+
+Or:
+
+Use an Internet Protocol API to get user location (ex. IP-API)(http://ip-api.com/docs/api:json)and then use the OpenWeatherMap API (http://openweathermap.org/current#geo) for the weather. Be sure to connect to CodePen.io via http://.
+
+Either weather API service will require creating a free API key. Normally you want to avoid exposing API keys on CodePen, but we haven't been able to find a keyless API for weather.
+
