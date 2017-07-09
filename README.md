@@ -4,6 +4,8 @@ Find weather condition of your current location. If location permission is denie
 - Toggle between Celsius and Fahrenheit
 - View the weather condition as a beautiful background wallpaper
 
+[View Demo](https://codepen.io/darush/full/yXLgra/) 
+
 ![Image](../master/img/screenshot1.jpg)
 
 ![Image](../master/img/screenshot2.jpg)
